@@ -4,6 +4,7 @@ var stache = require('stache');
 var app = express.createServer();
 
 app.configure(function() {
+  app.use(express.static(__dirname + '/public'));
   app.set('view engine', 'mustache');
   app.register('.mustache', stache);
 });
