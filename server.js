@@ -12,7 +12,19 @@ app.configure(function() {
 app.get("/", function(req, res) {
   res.render('index', {
     locals: {
-      title: 'Express'
+      title: 'Express',
+      source: '/video/myfile.mp4'
+    }
+  });
+});
+
+app.get("/v/:id", function(req, res) {
+  res.render('video', {
+    locals: {
+      title: 'Express',
+      
+      source: '/videojs/' + req.params.id + '.mp4'
+      //source: '/video/myfile.mp4'
     }
   });
 });
