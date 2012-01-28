@@ -1,0 +1,12 @@
+{
+    "name": "filmdeck"
+  , "version": "0.0.1"
+  , "private": true
+  , "dependencies": {
+      "express"   : "latest"
+    , "jade"      : "latest"
+    , "socket.io" : "latest"
+    , "browserify": "latest"
+  }
+}
+
