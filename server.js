@@ -17,4 +17,4 @@ app.get("/", function(req, res) {
 });
 
 app.listen(3001);
-
+console.log('running server on 3001');
