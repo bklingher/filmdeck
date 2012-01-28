@@ -4,8 +4,7 @@
   , "private": true
   , "dependencies": {
       "express"   : "latest"
-    , "jade"      : "latest"
-    , "socket.io" : "latest"
+    , "stache"  : "latest"
     , "browserify": "latest"
   }
 }
