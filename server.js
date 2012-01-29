@@ -6,16 +6,26 @@ var express = require("express"),
 var app = express.createServer();
 
 app.configure(function() {
-  app.use(express.compiler({ src: public, enable: ['less'] }))
   app.use(express.static(public));
+  app.set('views', __dirname + '/views');
+
   app.set('view engine', 'mustache');
-  app.register('.mustache', stache);
+  app.register(".mustache", require('stache'));
+});
+
+app.configure('development', function(){
+  app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
+});
+
+app.configure('production', function(){
+  app.use(express.errorHandler()); 
 });
 
 app.get("/", function(req, res) {
   res.render('index', {
     locals: {
-      title: 'VIDEODOZER'
+      title: 'VIDEODOZER',
+      username: 'peter'
     }
   });
 });
