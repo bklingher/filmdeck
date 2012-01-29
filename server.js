@@ -26,7 +26,7 @@ app.get("/v/:id", function(req, res) {
   res.render('video', {
     locals: {
       title: req.params.id,
-      source: '/uploads/' + req.params.id + '.mp4'
+      source: '/uploads/' + req.params.id,
       //source: '/video/myfile.mp4'
     }
   });
@@ -48,7 +48,7 @@ app.post('/file-upload', function(req, res, next) {
 
 
     
-    if (file.type.split('/')[0] != 'video'){
+    if (file.type.split('/')[1] != 'mp4'){
         fs.unlink(file.path, function(err) {
             if (err) throw err;
             console.log('successfully deleted '+file.path);
@@ -70,7 +70,7 @@ app.post('/file-upload', function(req, res, next) {
         console.log('rename completed');
     });
     
-    res.redirect('/v/'+file.name.split('.')[0]);
+    res.redirect('/v/'+file.name);
     
 });
 
