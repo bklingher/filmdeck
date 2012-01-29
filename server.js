@@ -75,7 +75,7 @@ app.post('/file-upload', function(req, res, next) {
 });
 
 app.post('/signup', function(req, res) {
-  console.log(req.params);
+  console.log(req);
 
   // var user = new User();
   // user.username = 'Ben';
