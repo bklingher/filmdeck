@@ -1,13 +1,11 @@
 var express = require("express"),
     stache = require('stache'),
-    less = require('less'),
     public = __dirname + '/public',
     fs = require('fs');
 
 var app = express.createServer();
 
 app.configure(function() {
-  app.use(express.compiler({ src: public, enable: ['less'] }))
   app.use(express.static(public));
   app.use(express.bodyParser({uploadDir:'./uploads'}));
   app.set('view engine', 'mustache');
@@ -59,7 +57,7 @@ app.post('/file-upload', function(req, res, next) {
     file.rename(file.path, file.name, function (err) {
         if (err) throw err;
         console.log('rename completed');
-    }
+    });
     
 });
 
