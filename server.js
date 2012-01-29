@@ -1,13 +1,17 @@
 var express = require("express");
 var stache = require('stache');
+var fs = require('fs');
 
 var app = express.createServer();
 
 app.configure(function() {
   app.use(express.static(__dirname + '/public'));
+  app.use(express.bodyParser({uploadDir:'./uploads'}));
   app.set('view engine', 'mustache');
   app.register('.mustache', stache);
 });
+
+
 
 app.get("/", function(req, res) {
   res.render('index', {
@@ -27,6 +31,35 @@ app.get("/v/:id", function(req, res) {
       //source: '/video/myfile.mp4'
     }
   });
+});
+
+/*
+<form method="post" enctype="multipart/form-data" action="/file-upload">
+    <input type="file" name="video">
+    <input type="submit">
+</form>
+*/
+
+
+app.post('/file-upload', function(req, res, next) {
+    console.log(req.body);
+    console.log(req.files);
+
+    var file = req.files.video;
+    if (file>500000000){
+        fs.unlink(file.path, function(err) {
+            if (err) throw err;
+            console.log('successfully deleted '+file.path);
+        });
+        res.send("We're sorry. File size cannot exceed 500 MB.");
+        return;
+    }
+    
+    file.rename(file.path, file.name, function (err) {
+        if (err) throw err;
+        console.log('rename completed');
+    }
+    
 });
 
 app.listen(3001);
