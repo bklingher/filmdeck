@@ -68,6 +68,10 @@
         padding-left: 19px;
         border-left: 1px solid #eee;
       }
+
+      .error {
+        color: red;
+      }
     </style>
 
     <!-- Le fav and touch icons -->
@@ -84,23 +88,24 @@
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
-          <a class="brand" href="#">Project name</a>
+          <a class="brand" href="/">TapeDeck</a>
           <ul class="nav">
             <li class="active"><a href="#">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
           {{^username}}
-          <form action="" class="form-search navbar-form pull-right">
+          <form method="post" action="/sign-in" class="form-search navbar-form pull-right">
             <input class="input-small" type="text" placeholder="Username">
             <input class="input-small" type="password" placeholder="Password">
-            <button class="btn" type="submit">Sign in</button>
+            <button class="btn" type="submit" id="sign-in-btn">Sign in</button>
+            <button class="btn" type="submit" data-toggle="modal" data-target="#signup-modal">Sign up</button>
           </form>
           {{/username}}
           {{#username}}
           <ul class="nav pull-right">
             <li class="dropdown" id="menu1">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#menu1">
+              <a class="dropdown-toggle" data-toggle="dropdown">
                 Account
                 <b class="caret"></b>
               </a>
@@ -125,8 +130,9 @@
           <h3>Upload a video</h3>
         </div>
         <div class="modal-body">
-          <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="300000" />  
+          <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="300000" />
           <input class="btn" type="file" name="video">
+          <input type="hidden" name="username" value="{{username}}">
         </div>
         <div class="modal-footer">
           <button id="upload-btn" data-loading-text="uploading..." class="btn primary">
@@ -136,6 +142,28 @@
         </div>
       </form>
     </div>
+
+    <div class="modal fade" id="signup-modal">
+      <form method="post" enctype="multipart/form-data" action="/signup">
+        <div class="modal-header">
+          <a class="close" data-dismiss="modal">×</a>
+          <h3>Signup</h3>
+        </div>
+        <div class="modal-body">
+          <p id="signup-error" class="error">HEYHEY</p>
+          <input placeholder="username" type="text" id="signup-username"/><br>
+          <input placeholder="email" type="text" id="signup-email"/><br>
+          <input placeholder="password" type="password" id="signup-password"/>
+        </div>
+        <div class="modal-footer">
+          <button id="signup-btn" data-loading-text="uploading..." class="btn primary">
+            Submit
+          </button>
+          <a href="#" class="btn">Close</a>
+        </div>
+      </form>
+    </div>
+
 
   </body>
 </html>
