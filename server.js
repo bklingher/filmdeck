@@ -9,7 +9,15 @@ app.configure(function() {
   app.use(express.static(public));
   app.use(express.bodyParser({uploadDir:'./uploads'}));
   app.set('view engine', 'mustache');
-  app.register('.mustache', stache);
+  app.register(".mustache", require('stache'));
+});
+
+app.configure('development', function(){
+  app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
+});
+
+app.configure('production', function(){
+  app.use(express.errorHandler()); 
 });
 
 
@@ -17,7 +25,8 @@ app.configure(function() {
 app.get("/", function(req, res) {
   res.render('index', {
     locals: {
-      title: 'VIDEODOZER'
+      title: 'VIDEODOZER',
+      username: 'peter'
     }
   });
 });
