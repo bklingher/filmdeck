@@ -1,10 +1,13 @@
-var express = require("express");
-var stache = require('stache');
+var express = require("express"),
+    stache = require('stache'),
+    less = require('less'),
+    public = __dirname + '/public';
 
 var app = express.createServer();
 
 app.configure(function() {
-  app.use(express.static(__dirname + '/public'));
+  app.use(express.compiler({ src: public, enable: ['less'] }))
+  app.use(express.static(public));
   app.set('view engine', 'mustache');
   app.register('.mustache', stache);
 });
@@ -12,8 +15,7 @@ app.configure(function() {
 app.get("/", function(req, res) {
   res.render('index', {
     locals: {
-      title: 'Express',
-      source: '/video/myfile.mp4'
+      title: 'VIDEODOZER'
     }
   });
 });
@@ -21,8 +23,7 @@ app.get("/", function(req, res) {
 app.get("/v/:id", function(req, res) {
   res.render('video', {
     locals: {
-      title: 'Express',
-      
+      title: req.params.id,
       source: '/videojs/' + req.params.id + '.mp4'
       //source: '/video/myfile.mp4'
     }

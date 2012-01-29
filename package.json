@@ -4,8 +4,9 @@
   , "private": true
   , "dependencies": {
       "express"   : "latest"
-    , "stache"  : "latest"
+    , "stache"    : "latest"
     , "browserify": "latest"
+    , "less"      : "latest"
   }
 }
 
