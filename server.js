@@ -64,7 +64,7 @@ app.post('/file-upload', function(req, res, next) {
         res.send("We're sorry. File size cannot exceed 500 MB.");
         return;
     }
-    
+
     fs.rename('./'+file.path, './public/uploads/'+file.name, function (err) {
         if (err) throw err;
         console.log('rename completed');

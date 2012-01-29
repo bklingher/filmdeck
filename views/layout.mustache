@@ -6,6 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <script src="/js/jquery-1.7.1.min.js"></script>
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -17,6 +18,9 @@
 
     <!-- Le styles -->
     <link href="/less/bootstrap.css" rel="stylesheet" type="text/css">
+    <script src="/js/bootstrap-dropdown.js"></script>
+    <script src="/js/bootstrap-modal.js"></script>
+
     <style type="text/css">
       /* Override some defaults */
       html, body {
@@ -70,6 +74,8 @@
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
     <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
     <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+
+    <script src="/js/main.js"></script>
   </head>
 
   <body>
@@ -91,28 +97,39 @@
           </form>
           {{/username}}
           {{#username}}
-<ul class="nav pills">
-  <li class="active"><a href="#">Regular link</a></li>
-  <li class="dropdown" id="menu1">
-    <a class="dropdown-toggle" data-toggle="dropdown" href="#menu1">
-      Dropdown
-      <b class="caret"></b>
-    </a>
-    <ul class="dropdown-menu">
-      <li><a href="#">Action</a></li>
-      <li><a href="#">Another action</a></li>
-      <li><a href="#">Something else here</a></li>
-      <li class="divider"></li>
-      <li><a href="#">Separated link</a></li>
-    </ul>
-  </li>
-</ul>
-        {{/username}}
+          <ul class="nav pull-right">
+            <li class="dropdown" id="menu1">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#menu1">
+                Account
+                <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Manage subscription</a></li>
+                <li><a data-toggle="modal" href="#" data-target="#upload-modal">Upload file</a></li>
+              </ul>
+            </li>
+          </ul>
+          {{/username}}
         </div>
       </div>
     </div>
 
+
     {{{yield}}}
+
+    <div class="modal fade" id="upload-modal">
+      <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3>Modal header</h3>
+      </div>
+      <div class="modal-body">
+        <p>One fine body…</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="btn primary">Save changes</a>
+        <a href="#" class="btn">Close</a>
+      </div>
+    </div>
 
   </body>
 </html>
