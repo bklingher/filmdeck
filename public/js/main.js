@@ -34,33 +34,21 @@ $(function() {
   });
 
 
-  $('#sign-in-btn').click(function signup(e) {
-    $('#signup-btn').button('loading');
+  $("#sign-in-form").submit(function(event) {
 
-    var $err = $('#signup-error').hide();
+    event.preventDefault(); 
 
-    var name = $("input#signup-username").val();
-    var email = $("input#signup-email").val();
-    var password = $("input#signup-password").val();
-    var err = ''
-    if (name == "") {
-      err = 'Please enter a username.';
-      $("input#signup-username").focus();
-    } else if (email == "") {
-      err = 'Please enter a valid email.';
-      $("input#email").focus();
-    } else if (password.length < 7) {
-      err = 'The password must be at least 7 characters.';
-      $("input#email").focus();
-    }
+    var $form = $( this ),
+        user = $form.find('input[placeholder="Username"]').val(),
+        pass = $form.find('input[placeholder="Password"]').val(),
+        url = $form.attr('action');
 
-    if (err != '') {
-      $err.show();
-      $err.html(err);
-      $('#signup-btn').button('reset');
-      e.preventDefault();
-    }
-    this.click(signup);
+    $.post(url, { username: user, password: pass },
+      function(data) {
+          var content = $(data).find('#content');
+          console.log(content);
+          console.log(data);
+      }
+    );
   });
-
 });

@@ -12,7 +12,16 @@ app.configure(function() {
   app.register('.mustache', stache);
 });
 
+var mongoose = require('mongoose');
 
+mongoose.connect('mongodb://localhost/my_database');
+
+var User = new mongoose.Schema({
+    username  : String
+  , password  : String
+  , email     : String
+})
+  , User = mongoose.model('User', User);
 
 app.get("/", function(req, res) {
   res.render('index', {
@@ -39,8 +48,6 @@ app.post('/file-upload', function(req, res, next) {
 
     var file = req.files.video;
 
-
-    
     if (file.type.split('/')[1] != 'mp4'){
         fs.unlink(file.path, function(err) {
             if (err) throw err;
@@ -62,9 +69,19 @@ app.post('/file-upload', function(req, res, next) {
         if (err) throw err;
         console.log('rename completed');
     });
-    
+
     res.redirect('/v/'+file.name);
-    
+
+});
+
+app.post('/signup', function(req, res) {
+  console.log(req.params);
+
+  // var user = new User();
+  // user.username = 'Ben';
+  // user.save();
+
+  // res.send('HEY');
 });
 
 app.listen(3001);
