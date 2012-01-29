@@ -1,5 +1,5 @@
-// $(function() {
-//   $('#show-upload').click(function(e) {
-//     console.log('clicked');
-//   });
-// });
+$(function() {
+  $('#upload-btn').click(function(e) {
+    $('#upload-btn').button('loading');
+  });
+});
