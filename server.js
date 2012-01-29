@@ -17,7 +17,8 @@ app.configure(function() {
 app.get("/", function(req, res) {
   res.render('index', {
     locals: {
-      title: 'VIDEODOZER'
+      title: 'VIDEODOZER',
+      username: 'peter'
     }
   });
 });
@@ -31,14 +32,6 @@ app.get("/v/:id", function(req, res) {
     }
   });
 });
-
-/*
-<form method="post" enctype="multipart/form-data" action="/file-upload">
-    <input type="file" name="video">
-    <input type="submit">
-</form>
-*/
-
 
 app.post('/file-upload', function(req, res, next) {
 

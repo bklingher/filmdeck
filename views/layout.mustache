@@ -120,10 +120,13 @@
     <div class="modal fade" id="upload-modal">
       <div class="modal-header">
         <a class="close" data-dismiss="modal">×</a>
-        <h3>Modal header</h3>
+        <h3>Upload a video</h3>
       </div>
       <div class="modal-body">
-        <p>One fine body…</p>
+        <form method="post" enctype="multipart/form-data" action="/file-upload">
+            <input type="file" name="video">
+            <input type="submit">
+        </form>
       </div>
       <div class="modal-footer">
         <a href="#" class="btn primary">Save changes</a>
