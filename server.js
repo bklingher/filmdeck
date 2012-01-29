@@ -16,12 +16,19 @@ var mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost/my_database');
 
+// Schemas
 var User = new mongoose.Schema({
     username  : String
   , password  : String
   , email     : String
 })
   , User = mongoose.model('User', User);
+
+var Video = new mongoose.Schema({
+    username  : String
+  , title     : String
+})
+  , Video = mongoose.model('Video', Video);
 
 app.get("/", function(req, res) {
   res.render('index', {
