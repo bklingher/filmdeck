@@ -149,30 +149,7 @@
       </form>
     </div>
 
-    <div class="modal fade" id="signup-modal">
-      <form method="post" action="/signup">
-        <div class="modal-header">
-          <a class="close" data-dismiss="modal">×</a>
-          <h3>Signup</h3>
-        </div>
-        <div class="modal-body">
-          <p id="signup-error" class="error"></p>
-          <input placeholder="username" type="text" id="signup-username"
-          name="{{everyauth.password.loginFormFieldName}}"/><br>
-          <input placeholder="email" type="text" id="signup-email"
-          name="email"/><br>
-          <input placeholder="password" type="password" id="signup-password"
-          name="{{everyauth.password.passwordFormFieldName}}"/>
-        </div>
-        <div class="modal-footer">
-          <button id="signup-btn" data-loading-text="uploading..." class="btn primary">
-            Submit
-          </button>
-          <a href="#" class="btn" data-dismiss="modal">Close</a>
-        </div>
-      </form>
-    </div>
-
+    {{>signup}}
 
   </body>
 </html>
