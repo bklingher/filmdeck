@@ -45,8 +45,6 @@ app.get("/v/:id", function(req, res) {
 });
 
 app.post('/file-upload', function(req, res, next) {
-    
-
     res.contentType('json');
 
     var file = req.files.video;
@@ -76,24 +74,6 @@ app.post('/file-upload', function(req, res, next) {
     res.redirect('/v/'+file.name);
 
 });
-
-// app.post('/signup', function(req, res) {
-//   user = new User(req.body);
-//   user.save(function(err) {
-//     if (err)
-//       console.log(err);
-//     else
-//       res.send('OK');
-//   });
-// });
-
-// app.post('/login', function(req, res) {
-// });
-
-// app.get('/login', function(req, res) {
-// });
-
-
 
 app.listen(3001);
 console.log('running server on 3001');
