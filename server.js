@@ -1,6 +1,5 @@
 var express = require("express")
   , stache = require('stache')
-  , public = __dirname + '/public'
   , fs = require('fs')
   , mongoose = require('mongoose')
   , mongooseAuth = require('mongoose-auth')
@@ -12,7 +11,7 @@ var User = mongoose.model('User');
 var Video = mongoose.model('Video');
 
 var app = express.createServer(
-    express.static(public)
+    express.static(__dirname + '/public')
   , express.bodyParser({uploadDir:'./public/uploads'})
   , express.cookieParser()
   , express.session({ secret: 'esoognom'})
