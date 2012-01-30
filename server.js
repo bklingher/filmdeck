@@ -27,6 +27,7 @@ var User = new mongoose.Schema({
 var Video = new mongoose.Schema({
     username  : String
   , title     : String
+  , thumbUrl  : String
 })
   , Video = mongoose.model('Video', Video);
 
@@ -82,13 +83,13 @@ app.post('/file-upload', function(req, res, next) {
 });
 
 app.post('/signup', function(req, res) {
-  console.log(req);
-
-  // var user = new User();
-  // user.username = 'Ben';
-  // user.save();
-
-  // res.send('HEY');
+  user = new User(req.body);
+  user.save(function(err) {
+    if (err)
+      console.log(err);
+    else
+      res.send('OK');
+  });
 });
 
 app.listen(3001);

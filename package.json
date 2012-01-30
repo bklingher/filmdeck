@@ -8,6 +8,7 @@
     , "browserify": "latest"
     , "less"      : "latest"
     , "mongoose"  : "latest"
+    , "mongoose-auth" : "latest"
   }
 }
 
