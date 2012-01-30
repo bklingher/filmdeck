@@ -34,21 +34,21 @@ $(function() {
   });
 
 
-  $("#sign-in-form").submit(function(event) {
+  // $("#login-form").submit(function(event) {
 
-    event.preventDefault(); 
+  //   event.preventDefault();
 
-    var $form = $( this ),
-        user = $form.find('input[placeholder="Username"]').val(),
-        pass = $form.find('input[placeholder="Password"]').val(),
-        url = $form.attr('action');
+  //   var $form = $( this ),
+  //       user = $form.find('input[placeholder="Username"]').val(),
+  //       pass = $form.find('input[placeholder="Password"]').val(),
+  //       url = $form.attr('action');
 
-    $.post(url, { username: user, password: pass },
-      function(data) {
-          var content = $(data).find('#content');
-          console.log(content);
-          console.log(data);
-      }
-    );
-  });
+  //   $.post(url, { username: user, password: pass },
+  //     function(data) {
+  //         var content = $(data).find('#content');
+  //         console.log(content);
+  //         console.log(data);
+  //     }
+  //   );
+  // });
 });

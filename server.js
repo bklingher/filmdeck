@@ -1,41 +1,35 @@
-var express = require("express"),
-    stache = require('stache'),
-    public = __dirname + '/public',
-    fs = require('fs');
+var express = require("express")
+  , stache = require('stache')
+  , public = __dirname + '/public'
+  , fs = require('fs')
+  , mongoose = require('mongoose')
+  , mongooseAuth = require('mongoose-auth')
+  , models = require('./models.js');
 
-var app = express.createServer();
+mongoose.connect('mongodb://localhost/test');
+
+var User = mongoose.model('User');
+var Video = mongoose.model('Video');
+
+var app = express.createServer(
+    express.static(public)
+  , express.bodyParser({uploadDir:'./public/uploads'})
+  , express.cookieParser()
+  , express.session({ secret: 'esoognom'})
+  , mongooseAuth.middleware()
+);
 
 app.configure(function() {
-  app.use(express.static(public));
-  app.use(express.bodyParser({uploadDir:'./public/uploads'}));
   app.set('view engine', 'mustache');
   app.register('.mustache', stache);
 });
 
-var mongoose = require('mongoose');
-
-mongoose.connect('mongodb://localhost/my_database');
-
-// Schemas
-var User = new mongoose.Schema({
-    username  : String
-  , password  : String
-  , email     : String
-})
-  , User = mongoose.model('User', User);
-
-var Video = new mongoose.Schema({
-    username  : String
-  , title     : String
-  , thumbUrl  : String
-})
-  , Video = mongoose.model('Video', Video);
+mongooseAuth.helpExpress(app);
 
 app.get("/", function(req, res) {
   res.render('index', {
     locals: {
       title: 'VIDEODOZER',
-      username: 'peter'
     }
   });
 });
@@ -51,6 +45,7 @@ app.get("/v/:id", function(req, res) {
 });
 
 app.post('/file-upload', function(req, res, next) {
+    
 
     res.contentType('json');
 
@@ -82,15 +77,23 @@ app.post('/file-upload', function(req, res, next) {
 
 });
 
-app.post('/signup', function(req, res) {
-  user = new User(req.body);
-  user.save(function(err) {
-    if (err)
-      console.log(err);
-    else
-      res.send('OK');
-  });
-});
+// app.post('/signup', function(req, res) {
+//   user = new User(req.body);
+//   user.save(function(err) {
+//     if (err)
+//       console.log(err);
+//     else
+//       res.send('OK');
+//   });
+// });
+
+// app.post('/login', function(req, res) {
+// });
+
+// app.get('/login', function(req, res) {
+// });
+
+
 
 app.listen(3001);
 console.log('running server on 3001');
